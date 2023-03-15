@@ -9,9 +9,15 @@ export default function EventForm() {
     //console.log(event.target.value);
     setInput(event.target.value);
   };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    console.log(input);
+  };
+
   return (
     <div>
-      <form className="form">
+      <form className="form" onSubmit={onSubmit}>
         <input type="text" value={input} onChange={onChange} />
         <button type="submit">Submit</button>
       </form>
