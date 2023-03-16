@@ -16,7 +16,7 @@ function Events() {
       });
   }, []);
 
-  const postRequest = () => {};
+  //const postRequest = () => {};
 
   return (
     <div>
@@ -29,7 +29,7 @@ function Events() {
             time={event.eventtime}
           />
         ))}
-        <EventForm onSubmit={onSubmit} />
+        <EventForm />
       </CardGroup>
     </div>
   );

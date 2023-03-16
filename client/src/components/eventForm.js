@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 export default function EventForm() {
-  let [event, setEvent] = useState({
+  const [event, setEvent] = useState({
     title: "",
     location: "",
     eventtime: "",
@@ -12,45 +12,58 @@ export default function EventForm() {
   //ex.c..ca..cat
   //updating value
   //cat
-  const onChange = (event) => {
-    //by console logging, was able to confirm we are receiving values in our console
-    //console.log(event.target.value);
-    setEvent(event.target.value);
+  const handleTitleChange = (e) => {
+    e.preventDefault();
+    let newTitle = e.target.value;
+    setEvent((event) => ({ ...event, title: newTitle }));
+    //console.log(event.title);
+  };
+  const handleLocationChange = (e) => {
+    e.preventDefault();
+    let newLocation = e.target.value;
+    setEvent((event) => ({ ...event, location: newLocation }));
+  };
+
+  const handleDateChange = (e) => {
+    e.preventDefault();
+    let newDate = e.target.value;
+    setEvent((event) => ({ ...event, eventtime: newDate }));
   };
 
   //now that input value is saved
   //we want to render that data to frontend
   //when user clicks on button
-  const onSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event);
   };
 
   return (
     <div>
-      <form className="form" onSubmit={onSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <label>Title:</label>
         <input
           type="text"
           id="add-event-title"
           placeholder="Event Title"
           value={event.title}
-          onChange={onChange}
+          onChange={handleTitleChange}
+        />
+        <label>Location:</label>
+        <input
+          id="add-event-location"
+          type="text"
+          placeholder="Event Location"
+          value={event.location}
+          onChange={handleLocationChange}
         />
         <label>Date:</label>
         <input
-          id="add-event-date"
           type="date"
-          placeholder="Event Date"
-          value={event.location}
-          onChange={onChange}
-        />
-        <label>Time:</label>
-        <input
           id="event-add-time"
-          placeholder="Add time"
+          placeholder="add-event-date"
           value={event.eventtime}
-          onChange={onChange}
+          onChange={handleDateChange}
         />
         <button type="submit">Submit</button>
       </form>
