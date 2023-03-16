@@ -5,6 +5,7 @@ import EventForm from "./eventForm";
 
 function Events() {
   const [events, setEvents] = useState([]);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8086/api/events")
@@ -14,6 +15,8 @@ function Events() {
         console.log("Events fetched...", events);
       });
   }, []);
+
+  const postRequest = () => {};
 
   return (
     <div>
@@ -26,7 +29,7 @@ function Events() {
             time={event.eventtime}
           />
         ))}
-        <EventForm />
+        <EventForm onSubmit={onSubmit} />
       </CardGroup>
     </div>
   );

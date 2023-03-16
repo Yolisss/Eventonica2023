@@ -2,23 +2,56 @@ import React from "react";
 import { useState } from "react";
 
 export default function EventForm() {
-  let [input, setInput] = useState("");
+  let [event, setEvent] = useState({
+    title: "",
+    location: "",
+    eventtime: "",
+  });
 
+  //saving our input changes
+  //ex.c..ca..cat
+  //updating value
+  //cat
   const onChange = (event) => {
     //by console logging, was able to confirm we are receiving values in our console
     //console.log(event.target.value);
-    setInput(event.target.value);
+    setEvent(event.target.value);
   };
 
+  //now that input value is saved
+  //we want to render that data to frontend
+  //when user clicks on button
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(input);
+    console.log(event);
   };
 
   return (
     <div>
       <form className="form" onSubmit={onSubmit}>
-        <input type="text" value={input} onChange={onChange} />
+        <label>Title:</label>
+        <input
+          type="text"
+          id="add-event-title"
+          placeholder="Event Title"
+          value={event.title}
+          onChange={onChange}
+        />
+        <label>Date:</label>
+        <input
+          id="add-event-date"
+          type="date"
+          placeholder="Event Date"
+          value={event.location}
+          onChange={onChange}
+        />
+        <label>Time:</label>
+        <input
+          id="event-add-time"
+          placeholder="Add time"
+          value={event.eventtime}
+          onChange={onChange}
+        />
         <button type="submit">Submit</button>
       </form>
     </div>
