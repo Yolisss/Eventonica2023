@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import Events from "./events";
 
-export default function EventForm() {
+export default function EventForm(props) {
   const [event, setEvent] = useState({
     title: "",
     location: "",
@@ -12,8 +13,16 @@ export default function EventForm() {
   //ex.c..ca..cat
   //updating value
   //cat
+
+  //question for vlad
+  //i originally had value of newTitle as e.target.title
+  //e has access to all the methods (preventDefault,line 26:
+  //e represents big object
   const handleTitleChange = (e) => {
     e.preventDefault();
+    //the value of the input field is stored in DOM itself
+    //We just pass a reference to the input (e.target) and access
+    //the value of the input using the reference (e.target.value);
     let newTitle = e.target.value;
     setEvent((event) => ({ ...event, title: newTitle }));
     //console.log(event.title);
@@ -33,9 +42,11 @@ export default function EventForm() {
   //now that input value is saved
   //we want to render that data to frontend
   //when user clicks on button
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(event);
+  const handleSubmit = (e) => {
+    console.log("from eventForm", event);
+    e.preventDefault();
+    setEvent(event);
+    props.postRequest(event);
   };
 
   return (

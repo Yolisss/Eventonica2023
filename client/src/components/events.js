@@ -16,7 +16,25 @@ function Events() {
       });
   }, []);
 
-  //const postRequest = () => {};
+  // useEffect(() => {
+  //   getRequest();
+  // }, []);
+
+  const postRequest = (newEvent) => {
+    console.log("From the parent", newEvent);
+    return fetch("http://localhost:8086/api/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newEvent),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        //console.log("From the front", data);
+        setEvents((events) => [...events, data]);
+      });
+  };
 
   return (
     <div>
@@ -29,7 +47,7 @@ function Events() {
             time={event.eventtime}
           />
         ))}
-        <EventForm />
+        <EventForm postRequest={postRequest} />
       </CardGroup>
     </div>
   );
