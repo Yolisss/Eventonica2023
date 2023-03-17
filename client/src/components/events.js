@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import EventCard from "./event";
 import CardGroup from "react-bootstrap/CardGroup";
 import EventForm from "./eventForm";
+import EditEvent from "./editEvent";
 
 function Events() {
   const [events, setEvents] = useState([]);
