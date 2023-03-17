@@ -47,8 +47,10 @@ function Events() {
             time={event.eventtime}
           />
         ))}
-        <EventForm postRequest={postRequest} />
       </CardGroup>
+      <div className="form">
+        <EventForm postRequest={postRequest} />
+      </div>
     </div>
   );
 }

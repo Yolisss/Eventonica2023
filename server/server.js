@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 app.get("/api/events", async (req, res) => {
   //real connection with the DB eventonica
   try {
+    //rows property from pg library
     const { rows: events } = await db.query("SELECT * FROM events");
     res.send(events);
   } catch (error) {
@@ -48,11 +49,28 @@ app.post("/api/events", async (req, res) => {
   //TO - DO - At the end => save this event to the db
   //INSERT INTO events (title, location, eventtime) VALUES ('Women in Tech Techtonica Panel', 'Overland Park Convention Center', '2023-04-21')
   try {
+    //creating an object to store all of the information
+    //specifically all of the event info
     const newEvent = {
       title: req.body.title,
       location: req.body.location,
       eventtime: req.body.eventtime,
     };
+
+    //query=operation you want to perform on the db
+    //operation takes certain parameters
+    //insert operation where you can append data to a table
+    //events (which is your table) is your first param
+    //second param would be the columns you want to affect
+    //third param: what values you want to insert into those columns
+    //$1,$2,$3 placeholders and this allows you as 'prepared statement'
+    //prepared statement, secure way of giving a query user inputted
+    //data, if you don't use prepared statement, sequel injection
+    //is possible
+    //$1 refers to the first element (index 0) in the array you give it
+    //wild card(*) any value or every value
+    //RETURNING * = 'give me value from every column from
+    //the row that was just inserted'
     const result = await db.query(
       "INSERT INTO events(title, location, eventtime) VALUES ($1, $2, $3) RETURNING *",
       [newEvent.title, newEvent.location, newEvent.eventtime]
