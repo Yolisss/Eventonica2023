@@ -84,6 +84,37 @@ app.post("/api/events", async (req, res) => {
   }
 });
 
+//TO SPECIFY WHICH OBJ OF ARRAY DO I WANT TO GET
+app.put("/api/events/:id", async (req, res) => {
+  try {
+    //creating an object to store all of the information
+    //specifically all of the event info
+    const updateResult = await db.query(
+      //SET specifies which columns you want to update to which values
+      //id: what row should it affect
+      //without WHERE it will update every row of the table
+      "UPDATE events SET title = $1, location = $2, datettime = $3 WHERE id = $4",
+      [req.body.title, req.body.location, req.body.datettime, req.body.id]
+    );
+    let response = result.rows[0];
+    console.log(response);
+    res.json(response);
+  } catch (e) {
+    console.log(error);
+    return res.status(400).json({ error });
+  }
+});
+
 app.listen(PORT, () =>
   console.log(`Hola! Server running on Port http://localhost:${PORT}`)
 );
+
+//WHEN WE WORK WITH ASYNC AWAIT
+//equivalent to .then and .catch (this is what you have in the front end)
+//whenever you await a promise
+//if the promise is rejected (fails) then
+//that throws an exception
+//an uncaught exception is fatal meaning
+//your program (server) will terminate immediately
+//to prevent that from happening, you want to catch those exceptions
+//
