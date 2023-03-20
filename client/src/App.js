@@ -1,11 +1,13 @@
-import './App.css';
-import Events from './components/events';
+import "./App.css";
+import Events from "./components/events";
 
 function App() {
   return (
     <div className="App">
-      <h1>Techtonica 2023 events</h1>
-    <Events />
+      <div className="title">
+        <h1>Techtonica 2023 events</h1>
+      </div>
+      <Events />
     </div>
   );
 }

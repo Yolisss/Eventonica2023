@@ -1,3 +1,6 @@
+body {
+  padding: 25px 25px 80px 25px;
+}
 .App {
   display: grid;
   align-items: center;
@@ -12,4 +15,17 @@
 h1 {
   color: #00556e;
   margin-bottom: 50px !important;
+}
+
+.Events {
+  padding: 5px 25px 35px 25px;
+}
+.form {
+  display: flex;
+  justify-content: "center";
+  align-items: "center";
+}
+
+.title {
+  text-align: center;
 }
